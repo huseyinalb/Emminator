@@ -23,6 +23,17 @@ func (emitter *Emitter) On(message string, callback func()) {
 	addCallback(emitter.ons, message, callback)
 }
 
+func (emitter *Emitter) Off(message string) {
+        _, ok := emitter.ons[message]
+	if ok {
+		delete(emitter.ons, message)
+	}
+	_, ok = emitter.onces[message]
+	if ok {
+		delete(emitter.onces, message)
+	}
+}
+
 func (emitter *Emitter) Once(message string, callback func()) {
 	addCallback(emitter.onces, message, callback)
 }

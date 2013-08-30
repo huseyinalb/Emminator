@@ -39,4 +39,9 @@ func TestAll(t *testing.T) {
 	if len(msglist) < 5 || msglist[4] != "ready2" {
 		t.Error("ready not triggered immediately after readyState true")
 	}
+	m.Off("try")
+	m.Emit("try")
+        if len(msglist) > 5 && msglist[4] == "try1" {
+                t.Error("Off does not work")
+	}
 }
